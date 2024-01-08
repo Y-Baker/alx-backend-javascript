@@ -7,7 +7,7 @@ const onFinally = () => {
 };
 
 function handleResponseFromAPI(promise) {
-  promise.then(handleResolve).catch(handleReject).finally(onFinally);
+  return promise.then(handleResolve).catch(handleReject).finally(onFinally);
 }
 
 export default handleResponseFromAPI;
