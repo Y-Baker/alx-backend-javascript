@@ -13,6 +13,7 @@ nvm alias default 12.11
 node -v
 npm -v
 ```
+<hr />
 
 ## Get Started:
 
@@ -28,6 +29,7 @@ npm run dev [file.js]
 ```bash
 npm run lint [file.js]
 ```
+<hr />
 
 ## Authors :black_nib:
 
