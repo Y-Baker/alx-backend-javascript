@@ -1,11 +1,17 @@
-export default function cleanSet(set, startString) {
-  if (startString === '') return '';
-  let result = '';
+const cleanSet = (set, startString) => {
+  const stringWithNoPrefix = [];
 
-  for (const item of set) {
-    if (item.startsWith(startString)) {
-      result += `${item.slice(startString.length)}-`;
-    }
+  if (startString === '' || typeof startString !== 'string') {
+    return '';
   }
-  return result.slice(0, -1); // remove trailing '-'
-}
+
+  set.forEach((string) => {
+    if (typeof string === 'string' && string.startsWith(startString)) {
+      stringWithNoPrefix.push(string.substring(startString.length));
+    }
+  });
+
+  return stringWithNoPrefix.join('-');
+};
+
+export default cleanSet;
