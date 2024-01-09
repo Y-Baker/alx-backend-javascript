@@ -1,6 +1,7 @@
-import Currency from "./3-currency";
-import HolbertonCourse from "./2-hbtn_course";
+import Currency from './3-currency';
+import HolbertonCourse from './2-hbtn_course';
 
+/* eslint-disable no-underscore-dangle */
 class Pricing {
   constructor(amount, currency) {
     this.amount = amount;
@@ -21,10 +22,10 @@ class Pricing {
   }
 
   set currency(value) {
-    if (!value instanceof Currency) {
-      throw new TypeError(`Currency must be an instance of the Currency class`);
-    } else {
+    if (value instanceof Currency) {
       this._currency = value;
+    } else {
+      throw new TypeError('Currency must be an instance of the Currency class');
     }
   }
 
