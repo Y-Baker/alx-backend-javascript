@@ -6,7 +6,7 @@ class HolbertonCourse {
   }
 
   /* eslint-disable */
-  _checks(value, type) {
+  static _checks(value, type) {
     if (type === 'array') {
       if (!Array.isArray(value)) {
         throw new TypeError('Students must be an array of strings');
@@ -23,7 +23,7 @@ class HolbertonCourse {
   }
 
   set name(value) {
-    this._checks(value, 'string');
+    HolbertonCourse._checks(value, 'string')
     this._name = value;
   }
 
@@ -32,7 +32,7 @@ class HolbertonCourse {
   }
 
   set length(value) {
-    this._checks(value, 'number');
+    HolbertonCourse._checks(value, 'number');
     this._length = value;
   }
 
@@ -41,7 +41,7 @@ class HolbertonCourse {
   }
 
   set students(value) {
-    this._checks(value, 'array');
+    HolbertonCourse._checks(value, 'array');
     this._students = value;
   }
 }
