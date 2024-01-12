@@ -10,7 +10,7 @@ function handleProfileSignup(firstName, lastName, fileName) {
     for (const one of data) {
       result.push({
         status: one.status,
-        value: one.status === 'fulfilled' ? one.value : one.reason,
+        value: one.status === 'fulfilled' ? one.value : `Error: ${one.reason}`,
       });
     }
     return result;
