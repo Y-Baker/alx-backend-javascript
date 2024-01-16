@@ -1,5 +1,5 @@
 function cleanSet(set, starting) {
-  if (starting === '') return '';
+  if (starting === '' || typeof starting !== 'string') return '';
 
   return [...set].map((one) => {
     if (one && one.startsWith(starting)) {
