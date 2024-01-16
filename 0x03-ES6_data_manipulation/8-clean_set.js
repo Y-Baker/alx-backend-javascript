@@ -1,17 +1,9 @@
-const cleanSet = (set, startString) => {
-  const stringWithNoPrefix = [];
-
-  if (startString === '' || typeof startString !== 'string') {
-    return '';
-  }
-
-  set.forEach((string) => {
-    if (typeof string === 'string' && string.startsWith(startString)) {
-      stringWithNoPrefix.push(string.substring(startString.length));
+function cleanSet(set, starting) {
+  return [...set].map((one) => {
+    if (one.substr(0, starting.length) === starting) {
+      return one.substr(starting.length);
     }
-  });
-
-  return stringWithNoPrefix.join('-');
-};
+  }).filter((one) => one).join('-');
+}
 
 export default cleanSet;
