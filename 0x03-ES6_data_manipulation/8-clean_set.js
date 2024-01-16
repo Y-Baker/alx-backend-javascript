@@ -1,8 +1,11 @@
 function cleanSet(set, starting) {
+  if (starting === '') return '';
+
   return [...set].map((one) => {
-    if (one.substr(0, starting.length) === starting) {
+    if (one && one.startsWith(starting)) {
       return one.substr(starting.length);
     }
+    return undefined;
   }).filter((one) => one).join('-');
 }
 
