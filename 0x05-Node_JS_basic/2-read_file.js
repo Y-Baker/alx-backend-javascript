@@ -1,52 +1,37 @@
-#!/usr/bin/node
 const fs = require('fs');
 
-const Course = function courseConstructor(name, students) {
-  this.name = name;
-  this.students = students;
-};
-const courses = [];
-
-function countStudents(path) {
+function countStudents(fileName) {
+  const students = {};
+  const fields = {};
+  let length = 0;
   try {
-    let numberOfStudents = 0;
-    const data = fs.readFileSync(path, 'utf-8');
-    const lines = data.split('\n');
-    for (let idx = 1; idx < lines.length; idx += 1) {
-      const line = lines[idx].split(',');
-      if (line[0] && line[0] !== 'firstname') {
-        numberOfStudents += 1;
-        const courseNames = courses.map((course) => course.name);
-        if (courseNames.includes(line[3])) {
-          courses.forEach((course) => {
-            if (course.name === line[3]) {
-              course.students.push(line[0]);
-            }
-          });
+    const fileContents = fs.readFileSync(fileName, 'utf-8');
+    const lines = fileContents.toString().split('\n');
+    for (let i = 0; i < lines.length; i += 1) {
+      if (lines[i]) {
+        length += 1;
+        const field = lines[i].toString().split(',');
+        if (Object.prototype.hasOwnProperty.call(students, field[3])) {
+          students[field[3]].push(field[0]);
         } else {
-          const newCourse = new Course(line[3], [line[0]]);
-          courses.push(newCourse);
+          students[field[3]] = [field[0]];
+        }
+        if (Object.prototype.hasOwnProperty.call(fields, field[3])) {
+          fields[field[3]] += 1;
+        } else {
+          fields[field[3]] = 1;
         }
       }
     }
-    console.log(`Number of students: ${numberOfStudents}`);
-    for (let index = 0; index < courses.length; index += 1) {
-      const course = courses[index];
-      process.stdout.write(
-        `Number of students in ${course.name}: ${course.students.length}. List: `,
-      );
-      for (let j = 0; j < course.students.length; j += 1) {
-        const student = course.students[j];
-        process.stdout.write(student);
-        if (j !== course.students.length - 1) {
-          process.stdout.write(', ');
-        }
+    const l = length - 1;
+    console.log(`Number of students: ${l}`);
+    for (const [key, value] of Object.entries(fields)) {
+      if (key !== 'field') {
+        console.log(`Number of students in ${key}: ${value}. List: ${students[key].join(', ')}`);
       }
-      console.log();
     }
-  } catch (err) {
-    console.error(err);
-    throw new Error('Cannot load the database');
+  } catch (error) {
+    throw Error('Cannot load the database');
   }
 }
 
